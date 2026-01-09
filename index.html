@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Nakul 8K | Symmetrical OS</title>
+<style>
+:root { 
+    --neon: #00f2ff; 
+    --dim: rgba(0, 242, 255, 0.12); 
+    --glow: 0 0 25px rgba(0, 242, 255, 0.3);
+}
+
+body { margin: 0; background: #000; overflow: hidden; font-family: 'Orbitron', sans-serif; color: white; touch-action: none; }
+canvas { display: block; filter: saturate(1.1); width: 100vw; height: 100vh; }
+
+/* STARTUP - MINIMALIST SYMMETRY */
+#boot-screen { position: fixed; inset: 0; background: #000; z-index: 1000; display: flex; justify-content: center; align-items: center; transition: opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1); }
+.central-hub { position: relative; display: flex; flex-direction: column; align-items: center; padding: 60px; width: 280px; }
+.frame-bit { position: absolute; width: 40px; height: 40px; border: 1px solid var(--neon); opacity: 0.6; }
+.f-tl { top: 0; left: 0; border-right: 0; border-bottom: 0; }
+.f-tr { top: 0; right: 0; border-left: 0; border-bottom: 0; }
+.f-bl { bottom: 0; left: 0; border-right: 0; border-top: 0; }
+.f-br { bottom: 0; right: 0; border-left: 0; border-top: 0; }
+.boot-circle { width: 180px; height: 180px; border: 1px solid var(--dim); border-radius: 50%; display: flex; justify-content: center; align-items: center; position: relative; margin-bottom: 40px; box-shadow: var(--glow); }
+.boot-ring { position: absolute; inset: -10px; border: 2px solid transparent; border-top-color: var(--neon); border-bottom-color: var(--neon); border-radius: 50%; animation: spin 4s linear infinite; }
+.boot-name { font-size: 28px; font-weight: 900; letter-spacing: 15px; color: var(--neon); text-shadow: 0 0 30px var(--neon); text-indent: 15px; }
+.start-btn { background: transparent; border: 1px solid var(--neon); color: var(--neon); padding: 14px 40px; font-family: 'Orbitron'; font-size: 10px; letter-spacing: 6px; cursor: pointer; transition: 0.4s; font-weight: 900; text-transform: uppercase; -webkit-tap-highlight-color: transparent; }
+.start-btn:hover { background: var(--neon); color: #000; box-shadow: 0 0 40px var(--neon); }
+
+/* EARTH HUD */
+#hud { position: fixed; inset: 0; pointer-events: none; z-index: 10; padding: 20px; box-sizing: border-box; opacity: 0; transition: opacity 2s ease; display: flex; flex-direction: column; justify-content: space-between; align-items: center; }
+.bracket { position: absolute; width: 40px; height: 40px; border: 1px solid var(--dim); }
+.tl { top: 20px; left: 20px; border-right: 0; border-bottom: 0; }
+.tr { top: 20px; right: 20px; border-left: 0; border-bottom: 0; }
+.bl { bottom: 20px; left: 20px; border-right: 0; border-top: 0; }
+.br { bottom: 20px; right: 20px; border-left: 0; border-top: 0; }
+.header { text-align: center; width: 100%; }
+.header h1 { font-size: 14px; letter-spacing: 8px; margin: 0; font-weight: 300; }
+.header .user { color: var(--neon); font-weight: 900; }
+.divider { height: 1px; width: 180px; background: linear-gradient(90deg, transparent, var(--neon), transparent); margin: 10px auto; }
+#utc-time { font-size: 10px; opacity: 1; letter-spacing: 5px; margin-top:4px; color: var(--neon); text-shadow: 0 0 20px var(--neon); }
+
+/* Footer */
+.footer-hud { width: 100%; max-width: 600px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; font-size: 8px; letter-spacing: 3px; color: var(--neon); text-transform: uppercase; border-top: 1px solid var(--dim); padding-top: 15px; }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div id="boot-screen">
+    <div class="central-hub">
+        <div class="frame-bit f-tl"></div><div class="frame-bit f-tr"></div>
+        <div class="frame-bit f-bl"></div><div class="frame-bit f-br"></div>
+        <div class="boot-circle">
+            <div class="boot-ring"></div>
+            <div class="boot-name">NAKUL</div>
+        </div>
+        <button class="start-btn" onclick="launch()">Initialize</button>
+    </div>
+</div>
+
+<div id="hud">
+    <div class="bracket tl"></div><div class="bracket tr"></div>
+    <div class="bracket bl"></div><div class="bracket br"></div>
+    <div class="header">
+        <h1>GEOSPATIAL TERMINAL <span class="user">NAKUL</span></h1>
+        <div class="divider"></div>
+        <!-- UTC replaces SYMMETRY LOCK -->
+        <div id="utc-time">UTC: --:--:--</div>
+    </div>
+    <div class="footer-hud">
+        <div style="height: 1px; background: linear-gradient(90deg, transparent, var(--dim));"></div>
+        <div style="padding: 0 20px; font-weight: 900;">MADE BY NAKUL</div>
+        <div style="height: 1px; background: linear-gradient(270deg, transparent, var(--dim));"></div>
+    </div>
+</div>
+
+<script type="importmap">
+{ "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js", "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/" } }
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+window.launch = () => {
+    document.getElementById('boot-screen').style.opacity = '0';
+    document.getElementById('hud').style.opacity = '1';
+    setTimeout(() => document.getElementById('boot-screen').remove(), 1500);
+};
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 5000);
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: "high-performance" });
+
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+document.body.appendChild(renderer.domElement);
+
+const loader = new THREE.TextureLoader();
+function loadTexture(url) {
+    const tex = loader.load(url);
+    tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+    return tex;
+}
+
+// Earth
+const earth = new THREE.Mesh(
+    new THREE.SphereGeometry(20, 128, 128),
+    new THREE.MeshStandardMaterial({
+        map: loadTexture('https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/planets/earth_atmos_2048.jpg'),
+        normalMap: loadTexture('https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/planets/earth_normal_2048.jpg'),
+        normalScale: new THREE.Vector2(1.5,1.5),
+        roughnessMap: loadTexture('https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/planets/earth_specular_2048.jpg'),
+        roughness: 0.8
+    })
+);
+scene.add(earth);
+
+// Lights
+const sun = new THREE.DirectionalLight(0xffffff, 2.5); sun.position.set(50,20,50); scene.add(sun);
+const fill = new THREE.DirectionalLight(0x00f2ff,0.4); fill.position.set(-50,-20,-50); scene.add(fill);
+scene.add(new THREE.AmbientLight(0xffffff,0.2));
+
+// Camera adjust
+function adjust(){
+    camera.aspect = window.innerWidth/window.innerHeight;
+    camera.position.set(0,0,camera.aspect<1?120:110);
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth,window.innerHeight);
+}
+window.addEventListener('resize',adjust);
+adjust();
+
+// Stars
+const starGeo = new THREE.BufferGeometry();
+const pos = [];
+for(let i=0;i<10000;i++) pos.push((Math.random()-0.5)*3000,(Math.random()-0.5)*3000,(Math.random()-0.5)*3000);
+starGeo.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));
+scene.add(new THREE.Points(starGeo,new THREE.PointsMaterial({color:0xffffff,size:0.7,transparent:true,opacity:0.5})));
+
+// Controls
+const controls = new OrbitControls(camera,renderer.domElement);
+controls.enableDamping = true;
+controls.enablePan = true;
+controls.screenSpacePanning = true;
+controls.minDistance = 25;
+controls.maxDistance = 150;
+
+// Animate
+function animate(){
+    requestAnimationFrame(animate);
+    earth.rotation.y += 0.0003; 
+    controls.update();
+    renderer.render(scene,camera);
+}
+animate();
+
+// UTC Time
+function updateUTC(){
+    const now = new Date();
+    const h = String(now.getUTCHours()).padStart(2,'0');
+    const m = String(now.getUTCMinutes()).padStart(2,'0');
+    const s = String(now.getUTCSeconds()).padStart(2,'0');
+    document.getElementById('utc-time').textContent = `UTC: ${h}:${m}:${s}`;
+}
+setInterval(updateUTC,1000);
+updateUTC();
+</script>
+</body>
+</html>
